@@ -8,7 +8,7 @@ import Main from "./components/Main";
 function App() {
   return (
     <Routes>
-      <Route path="/todolist" element={<TodoList />} />
+      <Route path="/" element={<TodoList />} />
       <Route path="/addtask" element={<Main child={<AddTask />} />} />
     </Routes>
   );

@@ -6,6 +6,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+app.use(express.static(path.join(__dirname, "/build")));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
@@ -24,6 +25,10 @@ const connectDB = async () => {
 
 const todoApi = require("./Routes/todos");
 app.use("/api", todoApi);
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "/build/index.html"));
+});
 
 const PORT = process.env.PORT;
 connectDB().then(() => {

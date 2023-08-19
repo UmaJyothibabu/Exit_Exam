@@ -34,28 +34,24 @@ const AddTask = (props) => {
       try {
         console.log(values);
         if (props.method === "post") {
-          axios
-            .post(`http://localhost:8000/todolist`, values)
-            .then((response) => {
-              if (response.data.message === "Task added successfully") {
-                alert(response.data.message);
-                window.location.reload();
-                // navigate("/todolist");
-              } else {
-                alert("Unable to add");
-                window.location.reload();
-              }
-            });
+          axios.post(`/api/todolist`, values).then((response) => {
+            if (response.data.message === "Task added successfully") {
+              alert(response.data.message);
+              window.location.reload();
+              // navigate("/todolist");
+            } else {
+              alert("Unable to add");
+              window.location.reload();
+            }
+          });
         }
         if (props.method === "put") {
-          axios
-            .put(`http://localhost:8000/todolist/${values._id}`, values)
-            .then((response) => {
-              if (response.data.message === "Task updated successfully") {
-                alert(response.data.message);
-                window.location.reload();
-              }
-            });
+          axios.put(`/api/todolist/${values._id}`, values).then((response) => {
+            if (response.data.message === "Task updated successfully") {
+              alert(response.data.message);
+              window.location.reload();
+            }
+          });
         }
       } catch (error) {}
     },
@@ -92,7 +88,7 @@ const AddTask = (props) => {
             </Typography>
           </Grid>
           <Grid container>
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
               <Grid
                 container
                 justifyContent="center"
